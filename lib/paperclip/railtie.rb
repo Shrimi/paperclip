@@ -25,6 +25,7 @@ module Paperclip
       if defined?(ActiveRecord)
         Paperclip.options[:logger] = ActiveRecord::Base.logger
         ActiveRecord::Base.send(:include, Paperclip::Glue)
+        ActionController::Base.send(:include, Paperclip::Storage::Database::ControllerClassMethods)
       end
     end
   end
