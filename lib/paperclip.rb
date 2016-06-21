@@ -56,6 +56,7 @@ require 'paperclip/has_attached_file'
 require 'paperclip/attachment_registry'
 require 'paperclip/filename_cleaner'
 require 'paperclip/rails_environment'
+require 'paperclip/instance_methods'
 
 begin
   # Use mime/types/columnar if available, for reduced memory usage
@@ -191,7 +192,7 @@ module Paperclip
     #     end
     #   end
     def has_attached_file(name, options = {})
-      #HasAttachedFile.define_on(self, name, options)
+      HasAttachedFile.define_on(self, name, options)
       include InstanceMethods
 
       if attachment_definitions.nil?
