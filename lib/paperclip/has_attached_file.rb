@@ -75,7 +75,8 @@ module Paperclip
     end
 
     def register_new_attachment
-      Paperclip::AttachmentRegistry.register(@klass, @name, @options)
+      #Paperclip::AttachmentRegistry.register(@klass, @name, @options) #SS
+      Paperclip::AttachmentRegistry.register(@klass.name, @name, @options)
     end
 
     def add_required_validations
@@ -108,7 +109,8 @@ module Paperclip
 
     module ClassMethods
       def attachment_definitions
-        Paperclip::AttachmentRegistry.definitions_for(self)
+        #Paperclip::AttachmentRegistry.definitions_for(self) #SS
+        Paperclip::AttachmentRegistry.definitions_for(self.class.name)
       end
     end
   end
