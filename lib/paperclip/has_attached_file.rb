@@ -1,5 +1,6 @@
 module Paperclip
   class HasAttachedFile
+    puts "in has_attched_file"
     def self.define_on(klass, name, options)
       new(klass, name, options).define
     end
