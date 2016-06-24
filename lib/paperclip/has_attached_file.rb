@@ -1,25 +1,36 @@
 module Paperclip
   class HasAttachedFile
-    puts "in has_attched_file"
     def self.define_on(klass, name, options)
       new(klass, name, options).define
     end
 
     def initialize(klass, name, options)
+      puts "here1"
       @klass = klass
+      puts "here2"
       @name = name
+      puts "here3"
       @options = options
     end
 
     def define
+      puts "here4"
       define_flush_errors
+      puts "here5"
       define_getters
+      puts "here6"
       define_setter
+      puts "here7"
       define_query
+      puts "here8"
       register_new_attachment
+      puts "here9"
       add_active_record_callbacks
+      puts "here10"
       add_paperclip_callbacks
+      puts "here11"
       add_required_validations
+      puts "here12"
     end
 
     private
