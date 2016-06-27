@@ -3,11 +3,24 @@ require 'set'
 
 module Paperclip
   class << self
+    attr_accessor :classes_with_attachments
     attr_writer :registered_attachments_styles_path
     def registered_attachments_styles_path
       @registered_attachments_styles_path ||= Rails.root.join('public/system/paperclip_attachments.yml').to_s
     end
   end
+
+  self.classes_with_attachments = Set.new
+
+  def self.check_for_url_clash(name,url,klass)
+    @names_url ||= {}
+    default_url = url || Attachment.default_options[:url]
+    if @names_url[name] && @names_url[name][:url] == default_url && @names_url[name][:class] != klass && @names_url[name][:url] !~ /:class/
+      log("Duplicate URL for #{name} with #{default_url}. This will clash with attachment defined in #{@names_url[name][:class]} class")
+    end
+    @names_url[name] = {:url => default_url, :class => klass}
+  end
+
 
   # Get list of styles saved on previous deploy (running rake paperclip:refresh:missing_styles)
   def self.get_registered_attachments_styles

@@ -6,6 +6,7 @@ module Paperclip
   module Glue
     def self.included(base)
       base.extend ClassMethods
+      base.class_attribute :attachment_definitions if base.respond_to?(:class_attribute)
       base.send :include, Callbacks
       base.send :include, Validators
       base.send :include, Schema if defined? ActiveRecord::Base
