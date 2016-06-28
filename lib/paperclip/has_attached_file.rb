@@ -107,11 +107,11 @@ module Paperclip
         :post_process, :"#{@name}_post_process")
     end
 
-    #module ClassMethods
+    module ClassMethods
       def attachment_definitions
         #Paperclip::AttachmentRegistry.definitions_for(self) #SS
         Paperclip::AttachmentRegistry.definitions_for(self.class)
       end
-    #end
+    end
   end
 end
